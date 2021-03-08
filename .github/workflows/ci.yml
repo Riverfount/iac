@@ -78,9 +78,7 @@ jobs:
         run: ansible-playbook --private-key private_key playbook.yml -i hosts -v
         env:
             SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-    
-name: Discord notification
-  env:
+    needs: [linter, molecule]
     DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
   uses: Ilshidur/action-discord@master
     needs: [linter, molecule]
